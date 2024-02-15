@@ -1,5 +1,9 @@
 PROJECT_NAME = SushiNights
 
+PORT = sm83
+PLAT = gb
+#PLAT = duck
+
 all: build_gb
 
 # Number of banks (must be a power of 2): A (Automatic), 2, 4, 8, 16, 32...
