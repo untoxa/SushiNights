@@ -15,7 +15,7 @@ typedef struct {
 	UINT8 frame;
 } CUSTOM_DATA;
 
-void START() {
+void START(void) {
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	if(IsCollected(THIS) != 255) {
 		SpriteManagerRemove(THIS_IDX);
@@ -26,7 +26,7 @@ void START() {
   SetFrame(THIS, (((THIS->x >> 3) & 0x2) == 0) ? 0 : 1);
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	data->frame ++;
 	THIS->y = data->start_y + (SIN(data->frame + (UINT8)THIS->x) >> 5);
@@ -42,5 +42,5 @@ void UPDATE() {
 	}
 }
 
-void DESTROY() {
+void DESTROY(void) {
 }

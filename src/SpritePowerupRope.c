@@ -6,13 +6,13 @@ UINT8 IsCollected(Sprite* collectable) BANKED;
 void TakeCollectable(Sprite* powerup) BANKED;
 extern UINT8 rope_length;
 
-void START() {
+void START(void) {
 	if(IsCollected(THIS) != 255) {
 		SpriteManagerRemove(THIS_IDX);
 	}
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(CheckCollision(THIS, player_ptr)) {
 		rope_length += 10;
 		TakeCollectable(THIS);
@@ -20,5 +20,5 @@ void UPDATE() {
 	}
 }
 
-void DESTROY() {
+void DESTROY(void) {
 }

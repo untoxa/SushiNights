@@ -16,7 +16,7 @@ extern UINT8 current_level;
 void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED;
 UINT8 totalScore = 0;
 
-void START() {
+void START(void) {
 	InitScroll(BANK(victory), &victory, 0, 0);		
 	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 64, 64);
 	PlayerMenuSetAnim(sprite, 0);
@@ -46,7 +46,7 @@ void START() {
 	Printf("SCORE:  %d00 ", totalScore);	
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(KEY_TICKED(J_START)) {
 		SetState(StateSplash);
 	}

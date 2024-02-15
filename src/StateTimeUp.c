@@ -7,13 +7,13 @@
 IMPORT_MAP(gameover);
 DECLARE_MUSIC(gameover);
 
-void START() {
+void START(void) {
 	InitScroll(BANK(gameover), &gameover, 0, 0);
 	PlayMusic(gameover, 1);
 
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(KEY_TICKED(J_START)) {
 		SetState(StateGame);
 	}

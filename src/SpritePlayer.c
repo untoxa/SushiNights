@@ -103,8 +103,8 @@ void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED {
 }
 
 extern UINT8 clients_collected;
-void CheckLevelComplete() BANKED;
-void RefreshSushies() BANKED;
+void CheckLevelComplete(void) BANKED;
+void RefreshSushies(void) BANKED;
 UINT8 deliver_countdown;
 PLAYER_STATE cached_state;
 UINT8* cached_anim;
@@ -124,11 +124,11 @@ void DeliverSushi(Sprite* client) BANKED {
 	SetPlayerState(STATE_DELIVERING_SUSHI);
 }
 
-void ShowVictoryAnim() BANKED {
+void ShowVictoryAnim(void) BANKED {
 	SetPlayerState(STATE_VICTORY);
 }
 
-void START() {
+void START(void) {
 	THIS->lim_x = 1000;
 	THIS->lim_y = 1000;
 
@@ -150,7 +150,7 @@ void START() {
 #define X_SPEED_INCREMENT_OPPOSITE 20
 #define DRAG (speed_x >> 4)
 
-void HorizontalMove() {
+void HorizontalMove(void) {
 	if(KEY_PRESSED(J_LEFT)) {
 		if(speed_x > -MAX_X_SPEED) {
 			speed_x -= THIS->mirror == NO_MIRROR ? X_SPEED_INCREMENT_OPPOSITE : X_SPEED_INCREMENT;
@@ -183,7 +183,7 @@ void HorizontalMove() {
 
 #define JUMP_SPEED 870
 
-void UpdateWalk() {
+void UpdateWalk(void) {
 	safe_jump_x = THIS->x;
 	safe_jump_y = THIS->y;
 
@@ -212,7 +212,7 @@ void UpdateWalk() {
 #define MAX_HOOK_SPEED 1000
 #define HOOK_DRAG (hook_speed >> 7)
 
-void UpdateHooked() {
+void UpdateHooked(void) {
 	fixed tmp_x, tmp_y;
 	INT16 new_x, new_y;
 	UINT8 ang = hook_ang.h;
@@ -284,7 +284,7 @@ void UpdateHooked() {
 #define MAX_Y_SPEED 900
 #define GRAVITY 28
 
-void UpdateFlying() {
+void UpdateFlying(void) {
 	if(speed_y < MAX_Y_SPEED) {
 		speed_y += GRAVITY;
 	}
@@ -313,7 +313,7 @@ void UpdateFlying() {
 	}
 }
 
-void UpdateFallRespawn() {
+void UpdateFallRespawn(void) {
 	if((INT16)THIS->x > safe_jump_x)
 		THIS->x --;
 	else if((INT16)THIS->x < safe_jump_x)
@@ -328,7 +328,7 @@ void UpdateFallRespawn() {
 		SetPlayerState(STATE_WALKING);
 }
 
-void UpdateDeliveringSushi() {
+void UpdateDeliveringSushi(void) {
 	deliver_countdown --;
 	if(deliver_countdown == 0) {
 		CheckLevelComplete();
@@ -340,13 +340,13 @@ void UpdateDeliveringSushi() {
 	}
 }
 
-void UpdateVictory() {
+void UpdateVictory(void) {
 	if(THIS->anim_frame == 4) {
 		SetSpriteAnim(THIS, anim_victory, 6u);
 	}
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	switch(player_state) {
 		case STATE_WALKING:
 			UpdateWalk();
@@ -373,5 +373,5 @@ void UPDATE() {
 	}
 }
 
-void DESTROY() {
+void DESTROY(void) {
 }

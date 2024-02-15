@@ -16,11 +16,11 @@ void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED {
 	}
 }
 
-void START() {
+void START(void) {
 }
 
-void UPDATE() {
+void UPDATE(void) {
 }
 
-void DESTROY() {
+void DESTROY(void) {
 }

@@ -26,7 +26,7 @@ Sprite* hook_ptr = 0;
 extern Sprite* player_ptr;
 void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED;
 
-void InitRope() BANKED {
+void InitRope(void) BANKED {
 	UINT8 i = 0;
 	SpriteManagerLoad(SpriteHook);
 	while(i != 12) {
@@ -37,7 +37,7 @@ void InitRope() BANKED {
 	}
 }
 
-void START() {
+void START(void) {
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	data->dist = 0;
 	if(KEY_PRESSED(J_UP)){
@@ -52,7 +52,7 @@ void START() {
 	hook_ptr = THIS;
 }
 
-void DrawRope() {
+void DrawRope(void) {
 	UINT8 i = (player_ptr->coll_w >> 1) - 1;
 	UINT8 start_x = player_ptr->x - scroll_x + 8 + i;
 	UINT8 start_y = player_ptr->y - scroll_y + 16;
@@ -71,7 +71,7 @@ void DrawRope() {
 	next_oam_idx += sizeof(hook_rope) >> 2;
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	fixed radius;
 	fixed tmp_x;
 	fixed tmp_y;
@@ -122,6 +122,6 @@ void RetireHook(Sprite* hook, INT8 ang, INT8 radius) BANKED {
 	}
 }
 
-void DESTROY() {
+void DESTROY(void) {
 	hook_ptr = 0;
 }

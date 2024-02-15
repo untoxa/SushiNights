@@ -16,7 +16,7 @@ extern UINT8 current_level;
 
 void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED;
 
-void START() {
+void START(void) {
 	InitScroll(BANK(mainmenu), &mainmenu, 0, 0);
 	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 122,56);
 	PlayerMenuSetAnim(sprite, 0);
@@ -29,7 +29,7 @@ void START() {
 	PlayMusic(start, 1);
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(KEY_TICKED(J_START)) {
 		current_level = 0;
 		SetState(StateGame);

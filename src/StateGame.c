@@ -67,7 +67,7 @@ UINT8 level_complete;
 #define MAX_COLLECTABLES 10
 UINT16 collectables_taken[MAX_COLLECTABLES + 1];
 
-void InitRope() BANKED;
+void InitRope(void) BANKED;
 
 void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) __nonbanked{
 	UINT8 x, y, tile;
@@ -92,7 +92,7 @@ const UINT8 CHECKED_TILE = 75;
 const UINT8 UNCHECKED_TILE = 74;
 const UINT8 SUSHI_TILE= 86;
 const UINT8 NOSUSHI_TILE = 87;
-void RefreshSushies() BANKED {
+void RefreshSushies(void) BANKED {
 	UINT8 i;
 
 	if (sushi_collected)
@@ -112,7 +112,7 @@ void RefreshSushies() BANKED {
 	}
 }
 
-void START() {
+void START(void) {
 	UINT8 start_x, start_y;
 	const struct MapInfoBanked* level = &levels[current_level];
 	highscore[current_level] = 0;
@@ -147,7 +147,7 @@ void START() {
 	PlayMusic(level1, 1);
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(!level_complete) {
 		ticks ++;
 		if(ticks == 60) {
@@ -189,8 +189,8 @@ void TakeCollectable(Sprite* collectable) BANKED {
 	RefreshSushies();
 }
 
-void DoAnimLevelEnd();
-void CheckLevelComplete() BANKED {
+void DoAnimLevelEnd(void);
+void CheckLevelComplete(void) BANKED {
 	if(clients_collected == num_clients) {
 		highscore[current_level] = countdown;
 		DoAnimLevelEnd();
@@ -198,8 +198,8 @@ void CheckLevelComplete() BANKED {
 }
 
 extern Sprite* player_ptr;
-void ShowVictoryAnim() BANKED;
-void DoAnimLevelEnd() {
+void ShowVictoryAnim(void) BANKED;
+void DoAnimLevelEnd(void) {
 	UINT8 top_bar_start    = (((player_ptr->y                     ) >> 3) - 1) & 0x1F;
 	UINT8 bottom_bar_start = (((player_ptr->y + player_ptr->coll_h) >> 3) + 1) & 0x1F;
 

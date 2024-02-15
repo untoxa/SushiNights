@@ -15,7 +15,7 @@ static UINT8 anim_happy_alt[] = {2, 6, 7};
 
 #define ANIM(A) (((THIS->x >> 3) & 0x2) == 0) ? A : A ## _alt
 
-void START() {
+void START(void) {
 	if(IsCollected(THIS) == 255) {
 		SetSpriteAnim(THIS, ANIM(anim_idle), 4);
 	} else {
@@ -23,7 +23,7 @@ void START() {
 	}
 }
 
-void UPDATE() {
+void UPDATE(void) {
 	if(sushi_collected && (THIS->anim_data == anim_idle || THIS->anim_data == anim_idle_alt)) {
 		if(CheckCollision(THIS, player_ptr)) {
 			SetSpriteAnim(THIS, ANIM(anim_happy), 4);
@@ -36,5 +36,5 @@ void UPDATE() {
 	}
 }
 
-void DESTROY() {
+void DESTROY(void) {
 }
