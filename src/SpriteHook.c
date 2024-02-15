@@ -5,7 +5,7 @@
 #include "Trig.h"
 #include "ZGBMain.h"
 #include "Scroll.h"
-#include<string.h>
+#include <string.h>
 #include "Keys.h"
 #include "Sounds.h"
 
