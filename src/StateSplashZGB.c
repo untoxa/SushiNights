@@ -3,12 +3,15 @@
 #include "Scroll.h"
 #include "Keys.h"
 #include "ZGBMain.h"
+#include "SGB.h"
 
 IMPORT_MAP(splash_zgb);
+IMPORT_MAP(border);
 
 static UINT8 n_frames;
 
 void START(void) {
+	LOAD_SGB_BORDER(border);
 	n_frames = 0;
 	InitScroll(BANK(splash_zgb), &splash_zgb, 0, 0);
 }

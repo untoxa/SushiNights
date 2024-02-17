@@ -1,5 +1,8 @@
 PROJECT_NAME = SushiNights
 
+#PORT = z80
+#PLAT = gg
+
 PORT = sm83
 PLAT = gb
 #PLAT = duck
