@@ -53,7 +53,7 @@ const struct MapInfoBanked levels[] = {
 
 UINT8 current_level = 0;
 
-UINT8 coll_tiles[] = {1, 2,4,5,6,7,13,15,50,51,52,53, 0};
+const UINT8 coll_tiles[] = {1, 2,4,5,6,7,13,15,50,51,52,53, 0};
 UINT8 highscore[] = { 0,0,0,0,0,0,0,0 };
 
 UINT8 rope_length;
