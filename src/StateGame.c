@@ -32,7 +32,7 @@ DECLARE_MUSIC(level1);
 struct MapInfoBanked {
 	UINT8 bank;
 	struct MapInfo* map;
-	UINT16 seconds;
+	UINT8 seconds;
 };
 
 const struct MapInfoBanked levels[] = {
@@ -60,7 +60,7 @@ UINT8 rope_length;
 UINT8 sushi_collected;
 UINT8 num_clients;
 UINT8 clients_collected;
-UINT16 countdown;
+UINT8 countdown;
 UINT8 ticks;
 UINT8 level_complete;
 
@@ -154,7 +154,7 @@ void UPDATE(void) {
 			ticks = 0;
 			countdown --;
 			PRINT_POS(2, 0);
-			Printf("%d", countdown);
+			Printf("%d", (UINT16)countdown);
 			if(countdown == 99 || countdown == 9) {
 				Printf(" ");
 			} else if(countdown == 0) {
@@ -228,7 +228,7 @@ void DoAnimLevelEnd(void) {
 	print_target = PRINT_BKG;
 	PRINT_POS(x + 2 , (top_bar_start - 3) & 0x1F);
 
-	Printf(" LVL SCORE %d00  ", highscore[current_level]);
+	Printf(" LVL SCORE %d00  ", (INT16)highscore[current_level]);
 
 	PRINT(x + 5, (top_bar_start - 1) & 0x1F, "GOOD JOB!");	
 	level_complete = 1;

@@ -14,7 +14,7 @@ extern UINT8 highscore[];
 extern UINT8 current_level;
 
 void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED;
-UINT8 totalScore = 0;
+UINT16 totalScore = 0;
 
 void START(void) {
 	InitScroll(BANK(victory), &victory, 0, 0);		
@@ -36,8 +36,9 @@ void START(void) {
 	
 	INIT_FONT(blackfont, PRINT_BKG);
 	PRINT(6, 13, " YOU WIN");
-	UINT8 i;
-	for ( i = 0; i < current_level; i++)
+
+	totalScore = 0;
+	for (UINT8 i = 0; i < current_level; i++)
 	{
 		totalScore += highscore[i];
 	}
