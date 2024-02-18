@@ -69,7 +69,7 @@ UINT16 collectables_taken[MAX_COLLECTABLES + 1];
 
 void InitRope(void) BANKED;
 
-void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) __nonbanked{
+void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) NONBANKED {
 	UINT8 x, y, tile;
 	UINT8* data;
 	PUSH_BANK(map_bank);
