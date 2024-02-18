@@ -6,8 +6,7 @@
 typedef struct {
 	SAVEGAME_HEADER;
 
-  //Whatever content you want to store in external ram
-
+	UINT16 best_record;
 } Savegame;
 
 extern Savegame savegame;

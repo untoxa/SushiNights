@@ -5,6 +5,7 @@
 #include "ZGBMain.h"
 #include "SpriteManager.h"
 #include "Print.h"
+#include "savegame.h"
 
 IMPORT_TILES(blackfont);
 IMPORT_MAP(victory);
@@ -44,7 +45,14 @@ void START(void) {
 	}
 	
 	PRINT_POS(3, 4);
-	Printf("SCORE:  %d00 ", totalScore);	
+	Printf("SCORE:  %d00 ", totalScore);
+
+	ENABLE_RAM;
+	if (savegame.best_record < totalScore) savegame.best_record = totalScore;
+	PRINT_POS(3, 6);
+	Printf("BEST:   %d00 ", totalScore);
+	DISABLE_RAM;
+
 }
 
 void UPDATE(void) {
