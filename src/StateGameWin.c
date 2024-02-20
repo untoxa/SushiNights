@@ -47,12 +47,13 @@ void START(void) {
 	PRINT_POS(3, 4);
 	Printf("SCORE:  %d00 ", totalScore);
 
+#ifdef USE_SAVEGAME
 	ENABLE_RAM;
 	if (savegame.best_record < totalScore) savegame.best_record = totalScore;
 	PRINT_POS(3, 6);
 	Printf("BEST:   %d00 ", totalScore);
 	DISABLE_RAM;
-
+#endif
 }
 
 void UPDATE(void) {
