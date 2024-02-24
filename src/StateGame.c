@@ -141,9 +141,7 @@ void START(void) {
 	PRINT(19 - num_clients - 6, 0, "CLIENTS");
 	
 
-	NR52_REG = 0x80;
-	NR51_REG = 0xFF;
-	NR50_REG = 0x77;
+	INIT_SOUND();
 	PlayMusic(level1, 1);
 }
 
