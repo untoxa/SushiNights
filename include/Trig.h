@@ -1,7 +1,7 @@
 #ifndef TRIG_H
 #define TRIG_H
 
-#include <gb/gb.h>
+#include <gbdk/platform.h>
 
 extern const UINT8 sin[];
 
