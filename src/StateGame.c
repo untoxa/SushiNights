@@ -5,7 +5,6 @@
 #include "SpriteManager.h"
 #include "Print.h"
 #include <string.h>
-#include "BankManager.h"
 #include "MapInfo.h"
 #include "Music.h"
 #include "Keys.h"
@@ -70,22 +69,21 @@ UINT16 collectables_taken[MAX_COLLECTABLES + 1];
 void InitRope(void) BANKED;
 
 void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) NONBANKED {
-	UINT8 x, y, tile;
-	UINT8* data;
-	PUSH_BANK(map_bank);
+	UINT8 * data, __save_bank = CURRENT_BANK;
+	SWITCH_ROM(map_bank);
 	data = map->data;
-	for(y = 0; y < map->height; ++ y) {
-		for(x = 0; x < map->width; ++ x) {
-			tile = *(data ++);
-			if(tile == 252) {//client
+	for(UINT8 y = 0; y < map->height; ++ y) {
+		for(UINT8 x = 0; x < map->width; ++ x) {
+			UINT8 tile = *(data ++);
+			if(tile == 252) {          //client
 				num_clients ++;
-			}	else if(tile == 255) {
+			} else if (tile == 255) {  //player
 				*start_x = x;
 				*start_y = y;
 			}
 		}
 	}
-	POP_BANK;
+	SWITCH_ROM(__save_bank);
 }
 
 const UINT8 CHECKED_TILE = 75;
@@ -93,23 +91,25 @@ const UINT8 UNCHECKED_TILE = 74;
 const UINT8 SUSHI_TILE= 86;
 const UINT8 NOSUSHI_TILE = 87;
 void RefreshSushies(void) BANKED {
+#if defined(NINTENDO)
 	UINT8 i;
 
 	if (sushi_collected)
 	{
-		set_win_tiles(6, 0, 1, 1, &SUSHI_TILE);
+		set_win_tile_xy(6, 0, SUSHI_TILE);
 	}
 	else
 	{
-		set_win_tiles(6, 0, 1, 1, &NOSUSHI_TILE);
+		set_win_tile_xy(6, 0, NOSUSHI_TILE);
 	}
 
 	for(i = 0; i != clients_collected; ++i) {
-		set_win_tiles(19 - i, 0, 1, 1, &CHECKED_TILE);
+		set_win_tile_xy(19 - i, 0, CHECKED_TILE);
 	}
 	for(; i != num_clients; ++i) {
-		set_win_tiles(19 - i, 0, 1, 1, &UNCHECKED_TILE);
+		set_win_tile_xy(19 - i, 0, UNCHECKED_TILE);
 	}
+#endif
 }
 
 void START(void) {
@@ -198,8 +198,8 @@ void CheckLevelComplete(void) BANKED {
 extern Sprite* player_ptr;
 void ShowVictoryAnim(void) BANKED;
 void DoAnimLevelEnd(void) {
-	UINT8 top_bar_start    = (((player_ptr->y                     ) >> 3) - 1) & 0x1F;
-	UINT8 bottom_bar_start = (((player_ptr->y + player_ptr->coll_h) >> 3) + 1) & 0x1F;
+	UINT8 top_bar_start    = (((player_ptr->y                     ) >> 3) - 1) % DEVICE_SCREEN_BUFFER_HEIGHT;
+	UINT8 bottom_bar_start = (((player_ptr->y + player_ptr->coll_h) >> 3) + 1) % DEVICE_SCREEN_BUFFER_HEIGHT;
 
 	UINT8 n_bars = 15;
 
@@ -216,18 +216,18 @@ void DoAnimLevelEnd(void) {
 	
 	for(i = n_bars + 1; i != 0; --i) {
 		for(int j = 0; j < 21; ++j) {
-			set_bkg_tiles((x + j) & 0x1F, (top_bar_start - i) & 0x1F, 1, 1, &black_tile);
-			set_bkg_tiles((x + j) & 0x1F, (bottom_bar_start + i) & 0x1F, 1, 1, &black_tile);
+			set_bkg_tile_xy((x + j) & 0x1F, top_bar_start - i , black_tile);
+			set_bkg_tile_xy((x + j) & 0x1F, bottom_bar_start + i, black_tile);
 		}
-		delay(20);
+		wait_vbl_done();
 	}
 	ShowVictoryAnim();
 	INIT_FONT(blackfont, PRINT_WIN);
 	print_target = PRINT_BKG;
-	PRINT_POS(x + 2 , (top_bar_start - 3) & 0x1F);
+	PRINT_POS(x + 2 , (top_bar_start - 3) % DEVICE_SCREEN_BUFFER_HEIGHT);
 
 	Printf(" LVL SCORE %d00  ", (INT16)highscore[current_level]);
 
-	PRINT(x + 5, (top_bar_start - 1) & 0x1F, "GOOD JOB!");	
+	PRINT(x + 5, (top_bar_start - 1) % DEVICE_SCREEN_BUFFER_HEIGHT, "GOOD JOB!");	
 	level_complete = 1;
 }
