@@ -213,11 +213,11 @@ void UpdateWalk(void) {
 #define HOOK_DRAG (hook_speed >> 7)
 
 void UpdateHooked(void) {
-	fixed tmp_x, tmp_y;
-	INT16 new_x, new_y;
+	static fixed tmp_x, tmp_y;
+	static fixed cached_ang;
+	static INT16 new_x, new_y;
 	UINT8 ang = hook_ang.h;
 	INT8 rad_incr = 0;
-	fixed cached_ang;
 	
 	if(KEY_PRESSED(J_UP)){
 		if(hook_radius.w > 16) {
