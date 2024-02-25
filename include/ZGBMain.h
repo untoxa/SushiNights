@@ -10,12 +10,12 @@ _STATE(StateTimeUp)\
 STATE_DEF_END
 
 #define SPRITES \
-_SPRITE_DMG(SpritePlayer, player)\
+_SPRITE_DMG_FLIP(SpritePlayer, player, FLIP_X)\
 _SPRITE_DMG(SpriteHook, hook)\
 _SPRITE_DMG(SpritePowerupRope, powerup_rope)\
 _SPRITE_DMG(SpriteClient, client)\
 _SPRITE_DMG(SpriteSushi, sushi)\
-_SPRITE_DMG(SpritePlayerMenu, playermenu)\
+_SPRITE_DMG_FLIP(SpritePlayerMenu, playermenu, FLIP_X)\
 _SPRITE_DMG(SpriteBubble, bubble)\
 SPRITE_DEF_END
 
