@@ -54,14 +54,14 @@ void START(void) {
 
 void DrawRope(void) {
 	UINT8 i = (player_ptr->coll_w >> 1) - 1;
-	UINT8 start_x = player_ptr->x - scroll_x + 8 + i;
-	UINT8 start_y = player_ptr->y - scroll_y + 16;
+	UINT8 start_x = player_ptr->x - scroll_x + DEVICE_SPRITE_PX_OFFSET_X + i;
+	UINT8 start_y = player_ptr->y - scroll_y + DEVICE_SPRITE_PX_OFFSET_Y;
 	INT8 step_x = ((THIS->x - player_ptr->x - i) >> 2);
 	INT8 step_y = (THIS->y - player_ptr->y) >> 2;
 
 	INT8 x_inc = step_x;
 	INT8 y_inc = step_y;
-
+#if defined(NINTENDO)
 	for(i = 0; i != 12; i += 4, x_inc += step_x, y_inc += step_y) {
 		hook_rope[i    ] = start_y + y_inc;
 		hook_rope[i + 1] = start_x + x_inc;
@@ -69,6 +69,9 @@ void DrawRope(void) {
 
 	memcpy(oam + (next_oam_idx << 2), hook_rope, sizeof(hook_rope));
 	next_oam_idx += sizeof(hook_rope) >> 2;
+#elif defined(SEGA)
+	// todo: HOOK drawing on the Game Gear
+#endif
 }
 
 void UPDATE(void) {
