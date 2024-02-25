@@ -2,10 +2,10 @@
 #include "Trig.h"
 #include "SpriteManager.h"
 
-const UINT8 anim_idle_menu[] = { 2, 0,1};
-const UINT8 anim_frog[] = { 2, 2, 3 };
-const UINT8 anim_stag[] = { 2, 4, 5 };
-const UINT8 anim_sushi[] = { 1, 6 };
+static UINT8 anim_idle_menu[] = { 2, 0,1};
+static UINT8 anim_frog[] = { 2, 2, 3 };
+static UINT8 anim_stag[] = { 2, 4, 5 };
+static UINT8 anim_sushi[] = { 1, 6 };
 
 void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED {
 	switch(idx) {
