@@ -70,7 +70,14 @@ void DrawRope(void) {
 	memcpy(oam + (next_oam_idx << 2), hook_rope, sizeof(hook_rope));
 	next_oam_idx += sizeof(hook_rope) >> 2;
 #elif defined(SEGA)
-	// todo: HOOK drawing on the Game Gear
+	UINT8 * oam_y = oam + next_oam_idx;
+	UINT8 * oam_x = oam + 64 + (next_oam_idx << 1);
+	for(i = 0; i != 12; i += 4, x_inc += step_x, y_inc += step_y) {
+		*oam_y++ = hook_rope[i    ] = start_y + y_inc;
+		*oam_x++ = hook_rope[i + 1] = start_x + x_inc;
+		*oam_x++ = hook_rope[2];
+	}
+	next_oam_idx += 4;
 #endif
 }
 
