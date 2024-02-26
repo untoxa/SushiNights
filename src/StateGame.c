@@ -74,9 +74,9 @@ void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* sta
 	data = map->data;
 	for(UINT8 y = 0; y < map->height; ++ y) {
 		for(UINT8 x = 0; x < map->width; ++ x) {
-			UINT8 tile = *(data ++);
+			UINT8 tile = *data++;
 			if(tile == 252) {          //client
-				num_clients ++;
+				num_clients++;
 			} else if (tile == 255) {  //player
 				*start_x = x;
 				*start_y = y;
@@ -113,7 +113,7 @@ void RefreshSushies(void) BANKED {
 }
 
 void START(void) {
-	UINT8 start_x, start_y;
+	static UINT8 start_x, start_y;
 	const struct MapInfoBanked* level = &levels[current_level];
 	highscore[current_level] = 0;
 
