@@ -11,7 +11,7 @@
 
 extern UINT8 next_oam_idx;
 extern UINT8* oam;
-UINT8 hook_rope[12];
+UINT8 hook_rope_tile;
 extern UINT8 rope_length;
 
 typedef struct {
@@ -29,12 +29,7 @@ void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED;
 void InitRope(void) BANKED {
 	UINT8 i = 0;
 	SpriteManagerLoad(SpriteHook);
-	while(i != 12) {
-		hook_rope[i ++] = 50;
-		hook_rope[i ++] = 50 + i;
-		hook_rope[i ++] = spriteIdxs[SpriteHook] + 2;
-		hook_rope[i ++] = 0;
-	}
+	hook_rope_tile = spriteIdxs[SpriteHook] + 2;
 }
 
 void START(void) {
@@ -53,32 +48,35 @@ void START(void) {
 }
 
 void DrawRope(void) {
-	UINT8 i = (player_ptr->coll_w >> 1) - 1;
-	UINT8 start_x = player_ptr->x - scroll_x + DEVICE_SPRITE_PX_OFFSET_X + i;
-	UINT8 start_y = player_ptr->y - scroll_y + DEVICE_SPRITE_PX_OFFSET_Y;
-	INT8 step_x = ((THIS->x - player_ptr->x - i) >> 2);
-	INT8 step_y = (THIS->y - player_ptr->y) >> 2;
+	static UINT8 i, start_x, start_y;
+	static INT8 x_inc, y_inc, step_x, step_y;
+	
+	i = (player_ptr->coll_w >> 1) - 1;
 
-	INT8 x_inc = step_x;
-	INT8 y_inc = step_y;
+	start_x = player_ptr->x - scroll_x + DEVICE_SPRITE_PX_OFFSET_X + i;
+	x_inc = step_x = ((THIS->x - player_ptr->x - i) >> 2);
+
+	start_y = player_ptr->y - scroll_y + DEVICE_SPRITE_PX_OFFSET_Y;
+	y_inc = step_y = (THIS->y - player_ptr->y) >> 2;
+
 #if defined(NINTENDO)
-	for(i = 0; i != 12; i += 4, x_inc += step_x, y_inc += step_y) {
-		hook_rope[i    ] = start_y + y_inc;
-		hook_rope[i + 1] = start_x + x_inc;
+	UINT8 * oam_ptr = oam + (next_oam_idx << 2);
+	for(i = 4; i != 0; --i, x_inc += step_x, y_inc += step_y) {
+		*oam_ptr++ = start_y + y_inc;
+		*oam_ptr++ = start_x + x_inc;
+		*oam_ptr++ = hook_rope_tile;
+		*oam_ptr++ = 0;
 	}
-
-	memcpy(oam + (next_oam_idx << 2), hook_rope, sizeof(hook_rope));
-	next_oam_idx += sizeof(hook_rope) >> 2;
 #elif defined(SEGA)
 	UINT8 * oam_y = oam + next_oam_idx;
 	UINT8 * oam_x = oam + 64 + (next_oam_idx << 1);
-	for(i = 0; i != 12; i += 4, x_inc += step_x, y_inc += step_y) {
-		*oam_y++ = hook_rope[i    ] = start_y + y_inc;
-		*oam_x++ = hook_rope[i + 1] = start_x + x_inc;
-		*oam_x++ = hook_rope[2];
+	for(i = 4; i != 0; --i, x_inc += step_x, y_inc += step_y) {
+		*oam_y++ = start_y + y_inc;
+		*oam_x++ = start_x + x_inc;
+		*oam_x++ = hook_rope_tile;
 	}
-	next_oam_idx += 4;
 #endif
+	next_oam_idx += 4;
 }
 
 void UPDATE(void) {
