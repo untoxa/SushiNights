@@ -44,7 +44,7 @@ PLAYER_STATE player_state = STATE_WALKING;
 static UINT8 anim_idle[]      = {3,  0,1,2};
 static UINT8 anim_walk[]      = {4,  3,4,5,6};
 static UINT8 anim_jump[]      = {1,  7};
-static UINT8 anim_hooked[]    = {3,  7,8,10};
+static UINT8 anim_hooked[]    = {3,  7,8,9};
 static UINT8 anim_transform[] = {5,  11,12,13,12,13,13,13,13}; //Change to victory loop once THIS->anim_frame ==4
 static UINT8 anim_victory[]   = {2,  14,15};
 static UINT8 anim_respawn[]   = {1,  16};
