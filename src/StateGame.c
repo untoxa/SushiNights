@@ -28,6 +28,8 @@ DECLARE_MUSIC(level1);
 #define BANKED_MAP(MAP, SECONDS) {BANK(MAP), &MAP, SECONDS}
 #define LEVELS_END {0, 0}
 
+#define BLACK_TILE 0
+
 struct MapInfoBanked {
 	UINT8 bank;
 	struct MapInfo* map;
@@ -204,7 +206,6 @@ void DoAnimLevelEnd(void) {
 	UINT8 n_bars = 15;
 
 	UINT8 x = scroll_x >> 3;
-	UINT8 black_tile = 0;
 
 	UINT8 i;
 	Sprite* spr;
@@ -216,8 +217,8 @@ void DoAnimLevelEnd(void) {
 	
 	for(i = n_bars + 1; i != 0; --i) {
 		for(int j = 0; j < 21; ++j) {
-			set_bkg_tile_xy((x + j) & 0x1F, top_bar_start - i , black_tile);
-			set_bkg_tile_xy((x + j) & 0x1F, bottom_bar_start + i, black_tile);
+			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, top_bar_start - i, 0, BLACK_TILE, NULL); 
+			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, bottom_bar_start + i, 0, BLACK_TILE, NULL); 
 		}
 		wait_vbl_done();
 	}
