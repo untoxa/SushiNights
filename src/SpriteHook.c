@@ -72,7 +72,11 @@ void DrawRope(void) {
 	UINT8 * oam_x = oam + 64 + (next_oam_idx << 1);
 	for(i = 4; i != 0; --i, x_inc += step_x, y_inc += step_y) {
 		*oam_y++ = start_y + y_inc;
+#if defined(MASTERSYSTEM)
+		*oam_x++ = 8 + start_x + x_inc;
+#else
 		*oam_x++ = start_x + x_inc;
+#endif
 		*oam_x++ = hook_rope_tile;
 	}
 #endif

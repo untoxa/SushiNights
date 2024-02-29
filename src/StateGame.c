@@ -216,7 +216,7 @@ void DoAnimLevelEnd(void) {
 	}
 	
 	for(i = n_bars + 1; i != 0; --i) {
-		for(int j = 0; j < 21; ++j) {
+		for(int j = 0; j < DEVICE_SCREEN_WIDTH; ++j) {
 			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, top_bar_start - i, 0, BLACK_TILE, NULL); 
 			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, bottom_bar_start + i, 0, BLACK_TILE, NULL); 
 		}
@@ -225,10 +225,10 @@ void DoAnimLevelEnd(void) {
 	ShowVictoryAnim();
 	INIT_FONT(blackfont, PRINT_WIN);
 	print_target = PRINT_BKG;
-	PRINT_POS(x + 2 , (top_bar_start - 3) % DEVICE_SCREEN_BUFFER_HEIGHT);
+	PRINT_POS(x + ((DEVICE_SCREEN_WIDTH - 16) / 2), (top_bar_start - 3) % DEVICE_SCREEN_BUFFER_HEIGHT);
 
-	Printf(" LVL SCORE %d00  ", (INT16)highscore[current_level]);
+	Printf(" LVL SCORE %d00 ", (INT16)highscore[current_level]);
 
-	PRINT(x + 5, (top_bar_start - 1) % DEVICE_SCREEN_BUFFER_HEIGHT, "GOOD JOB!");	
+	PRINT(x + ((DEVICE_SCREEN_WIDTH - 10) / 2) + 1, (top_bar_start - 1) % DEVICE_SCREEN_BUFFER_HEIGHT, "GOOD JOB!");	
 	level_complete = 1;
 }
