@@ -217,8 +217,8 @@ void DoAnimLevelEnd(void) {
 	
 	for(i = n_bars + 1; i != 0; --i) {
 		for(int j = 0; j < DEVICE_SCREEN_WIDTH; ++j) {
-			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, top_bar_start - i, 0, BLACK_TILE, NULL); 
-			UpdateMapTile(PRINT_BKG, (x + j) & 0x1F, bottom_bar_start + i, 0, BLACK_TILE, NULL); 
+			UpdateMapTile(PRINT_BKG, x + j, top_bar_start - i, 0, BLACK_TILE, NULL); 
+			UpdateMapTile(PRINT_BKG, x + j, bottom_bar_start + i, 0, BLACK_TILE, NULL); 
 		}
 		wait_vbl_done();
 	}
