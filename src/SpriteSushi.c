@@ -36,7 +36,7 @@ void UPDATE(void) {
 			sushi_collected = 1;
 			TakeCollectable(THIS);
 			SpriteManagerAdd(SpriteBubble, THIS->x , THIS->y );
-			PlayFx(FX_PICKUP);
+			ExecuteSFX(BANK(FX_PICKUP), FX_PICKUP, SFX_MUTE_MASK(FX_PICKUP), SFX_PRIORITY_NORMAL);
 			SpriteManagerRemove(THIS_IDX);
 		}
 	}

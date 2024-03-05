@@ -183,7 +183,7 @@ void HorizontalMove(void) {
 	if(TranslateSprite(THIS, decimal_x.h, 0) != 0) {
 		speed_x = bounce_on_coll ? -speed_x : 0;
 		if(bounce_on_coll)
-			PlayFx(FX_HIT_WALL);
+			ExecuteSFX(BANK(FX_HIT_WALL), FX_HIT_WALL, SFX_MUTE_MASK(FX_HIT_WALL), SFX_PRIORITY_NORMAL);
 	}
 	
 	decimal_x.h = 0;
@@ -205,7 +205,7 @@ void UpdateWalk(void) {
 	
 	if(KEY_TICKED(J_A)){
 		SetPlayerState(STATE_FLYING);
-		PlayFx(FX_JUMP);
+		ExecuteSFX(BANK(FX_JUMP), FX_JUMP, SFX_MUTE_MASK(FX_JUMP), SFX_PRIORITY_NORMAL);
 		speed_y = -JUMP_SPEED;
 		check_key_released_on_jump = 1;
 		bounce_on_coll = 0;
@@ -288,7 +288,7 @@ void UpdateHooked(void) {
 			hook_speed = -hook_speed; //Bounce
 			hook_radius.w -= rad_incr; //Cancel radius increment
 			hook_ang = cached_ang; //Canel ang
-			PlayFx(FX_HIT_WALL);
+			ExecuteSFX(BANK(FX_HIT_WALL), FX_HIT_WALL, SFX_MUTE_MASK(FX_HIT_WALL), SFX_PRIORITY_NORMAL);
 		}
 	}
 }

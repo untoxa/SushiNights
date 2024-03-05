@@ -111,7 +111,7 @@ void UPDATE(void) {
 					} else {
 						data->hooked = 1;
 						HookPlayer(THIS->x, THIS->y, data->ang, radius.l);
-						PlayFx(FX_HIT);
+						ExecuteSFX(BANK(FX_HIT), FX_HIT, SFX_MUTE_MASK(FX_HIT), SFX_PRIORITY_NORMAL);
 					}
 				} 
 			}

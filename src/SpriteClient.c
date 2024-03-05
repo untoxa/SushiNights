@@ -29,7 +29,7 @@ void UPDATE(void) {
 			SetSpriteAnim(THIS, ANIM(anim_happy), 4);
 			sushi_collected = 0;
 			TakeCollectable(THIS);
-			PlayFx(FX_PICKUP);
+			ExecuteSFX(BANK(FX_PICKUP), FX_PICKUP, SFX_MUTE_MASK(FX_PICKUP), SFX_PRIORITY_NORMAL);
 			
 			DeliverSushi(THIS);
 		}

@@ -3,9 +3,20 @@
 
 #include "Sound.h"
 
-#define FX_JUMP CHANNEL_1, 10, 0x37, 0x80, 0xf4, 0xb7, 0x84
-#define FX_PICKUP CHANNEL_1, 10, 0x45, 0x00, 0xff, 0x1f, 0x86
-#define FX_HIT CHANNEL_4, 10, 0x0f, 0xf2, 0x64, 0x80
-#define FX_HIT_WALL CHANNEL_1, 10, 0x1B, 0x00, 0xf1, 0x73, 0x86
+BANKREF_EXTERN(FX_JUMP)
+extern void __mute_mask_FX_JUMP;
+extern const UINT8 FX_JUMP[];
+
+BANKREF_EXTERN(FX_PICKUP)
+extern void __mute_mask_FX_PICKUP;
+extern const UINT8 FX_PICKUP[];
+
+BANKREF_EXTERN(FX_HIT)
+extern void __mute_mask_FX_HIT;
+extern const UINT8 FX_HIT[];
+
+BANKREF_EXTERN(FX_HIT_WALL)
+extern void __mute_mask_FX_HIT_WALL;
+extern const UINT8 FX_HIT_WALL[];
 
 #endif
