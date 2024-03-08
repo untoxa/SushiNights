@@ -10,8 +10,6 @@
 #include "Sounds.h"
 
 extern UINT8 next_oam_idx;
-extern UINT8* oam;
-UINT8 hook_rope_tile;
 extern UINT8 rope_length;
 
 typedef struct {
@@ -29,7 +27,6 @@ void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED;
 void InitRope(void) BANKED {
 	UINT8 i = 0;
 	SpriteManagerLoad(SpriteHook);
-	hook_rope_tile = spriteIdxs[SpriteHook] + 2;
 }
 
 void START(void) {
@@ -47,40 +44,35 @@ void START(void) {
 	hook_ptr = THIS;
 }
 
+metasprite_t hook_rope[] = {
+#if defined(MASTERSYSTEM)
+	METASPR_ITEM(0, 8, 2, 0),
+#else
+	METASPR_ITEM(0, 0, 2, 0),
+#endif
+	METASPR_ITEM(0, 0, 2, 0),
+	METASPR_ITEM(0, 0, 2, 0),
+	METASPR_ITEM(0, 0, 2, 0),
+	METASPR_TERM
+};
+
 void DrawRope(void) {
 	static UINT8 i, start_x, start_y;
-	static INT8 x_inc, y_inc, step_x, step_y;
+	static INT8 step_x, step_y;
 	
 	i = (player_ptr->coll_w >> 1) - 1;
 
 	start_x = player_ptr->x - scroll_x + DEVICE_SPRITE_PX_OFFSET_X + i;
-	x_inc = step_x = ((THIS->x - player_ptr->x - i) >> 2);
+	step_x = ((THIS->x - player_ptr->x - i) >> 2);
 
 	start_y = player_ptr->y - scroll_y + DEVICE_SPRITE_PX_OFFSET_Y;
-	y_inc = step_y = (THIS->y - player_ptr->y) >> 2;
+	step_y = (THIS->y - player_ptr->y) >> 2;
 
-#if defined(NINTENDO)
-	UINT8 * oam_ptr = oam + (next_oam_idx << 2);
-	for(i = 4; i != 0; --i, x_inc += step_x, y_inc += step_y) {
-		*oam_ptr++ = start_y + y_inc;
-		*oam_ptr++ = start_x + x_inc;
-		*oam_ptr++ = hook_rope_tile;
-		*oam_ptr++ = 0;
+	for (i = 1; i != 4; i++) {
+		hook_rope[i].dy = step_y;
+		hook_rope[i].dx = step_x;
 	}
-#elif defined(SEGA)
-	UINT8 * oam_y = oam + next_oam_idx;
-	UINT8 * oam_x = oam + 64 + (next_oam_idx << 1);
-	for(i = 4; i != 0; --i, x_inc += step_x, y_inc += step_y) {
-		*oam_y++ = start_y + y_inc;
-#if defined(MASTERSYSTEM)
-		*oam_x++ = 8 + start_x + x_inc;
-#else
-		*oam_x++ = start_x + x_inc;
-#endif
-		*oam_x++ = hook_rope_tile;
-	}
-#endif
-	next_oam_idx += 4;
+	next_oam_idx += move_metasprite_ex(hook_rope, spriteIdxs[SpriteHook], 0, next_oam_idx, start_x, start_y);
 }
 
 void UPDATE(void) {
