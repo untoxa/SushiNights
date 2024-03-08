@@ -6,31 +6,11 @@
         {
             "label": "Release",
             "type": "shell",
-            "command": "${env:ZGB_PATH}/../env/make-3.81-bin/bin/make",
+            "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
             },
             "isBackground": false,
-            "args": [
-                "BUILD_TYPE=Release"
-            ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "ReleaseColor",
-            "type": "shell",
-            "command": "${env:ZGB_PATH}/../env/make-3.81-bin/bin/make",
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
-            "isBackground": false,
-            "args": [
-                "BUILD_TYPE=ReleaseColor"
-            ],
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -40,7 +20,7 @@
         {
             "label": "Debug",
             "type": "shell",
-            "command": "${env:ZGB_PATH}/../env/make-3.81-bin/bin/make",
+            "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
             },
@@ -48,28 +28,7 @@
             "args": [
                 "BUILD_TYPE=Debug"
             ],
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "DebugColor",
-            "type": "shell",
-            "command": "${env:ZGB_PATH}/../env/make-3.81-bin/bin/make",
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
-            "isBackground": false,
-            "args": [
-                "BUILD_TYPE=DebugColor"
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -78,18 +37,15 @@
         {
             "label": "Clean",
             "type": "shell",
-            "command": "${env:ZGB_PATH}/../env/make-3.81-bin/bin/make",
+            "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/src"
             },
             "isBackground": false,
             "args": [
-                "BUILD_TYPE=${defaultBuildTask}",
                 "clean"
             ],
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "problemMatcher": []
         }
     ]
 }
