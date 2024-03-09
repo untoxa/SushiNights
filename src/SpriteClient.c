@@ -8,10 +8,10 @@ UINT8 IsCollected(Sprite* collectable) BANKED;
 void TakeCollectable(Sprite* powerup) BANKED;
 void DeliverSushi(Sprite* client) BANKED;
 
-static UINT8 anim_idle[] = {2, 0, 1};
-static UINT8 anim_idle_alt[] = {2, 4, 5};
-static UINT8 anim_happy[] = {2, 2, 3};
-static UINT8 anim_happy_alt[] = {2, 6, 7};
+static const UINT8 anim_idle[] = {2, 0, 1};
+static const UINT8 anim_idle_alt[] = {2, 4, 5};
+static const UINT8 anim_happy[] = {2, 2, 3};
+static const UINT8 anim_happy_alt[] = {2, 6, 7};
 
 #define ANIM(A) (((THIS->x >> 3) & 0x2) == 0) ? A : A ## _alt
 

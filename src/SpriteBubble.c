@@ -2,7 +2,7 @@
 #include "Math.h"
 #include "SpriteManager.h"
 
-static UINT8 anim_bubble[] = {4,0,1,2,2};
+static const UINT8 anim_bubble[] = {4,0,1,2,2};
 
 
 void START(void) {

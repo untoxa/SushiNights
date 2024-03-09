@@ -42,23 +42,23 @@ typedef enum {
 PLAYER_STATE player_state = STATE_WALKING;
 
 #if defined(NINTENDO)
-static UINT8 anim_idle[]      = {3,  0,1,2};
-static UINT8 anim_walk[]      = {4,  3,4,5,6};
-static UINT8 anim_jump[]      = {1,  7};
-static UINT8 anim_hooked[]    = {3,  7,8,9};
-static UINT8 anim_transform[] = {5,  11,12,13,12,13};
-static UINT8 anim_victory[]   = {2,  14,15};
-static UINT8 anim_respawn[]   = {1,  16};
-static UINT8 anim_happy[]     = {2,  17,18};
+static const UINT8 anim_idle[]      = {3,  0,1,2};
+static const UINT8 anim_walk[]      = {4,  3,4,5,6};
+static const UINT8 anim_jump[]      = {1,  7};
+static const UINT8 anim_hooked[]    = {3,  7,8,9};
+static const UINT8 anim_transform[] = {5,  11,12,13,12,13};
+static const UINT8 anim_victory[]   = {2,  14,15};
+static const UINT8 anim_respawn[]   = {1,  16};
+static const UINT8 anim_happy[]     = {2,  17,18};
 #elif defined(SEGA)
-static UINT8 anim_idle[]      = {2,  0,1};
-static UINT8 anim_walk[]      = {3,  3,4,5};
-static UINT8 anim_jump[]      = {1,  7};
-static UINT8 anim_hooked[]    = {1,  7};
-static UINT8 anim_transform[] = {5,  11,13,13,13,13};
-static UINT8 anim_victory[]   = {2,  14,15};
-static UINT8 anim_respawn[]   = {1,  16};
-static UINT8 anim_happy[]     = {1,  17};
+static const UINT8 anim_idle[]      = {2,  0,1};
+static const UINT8 anim_walk[]      = {3,  3,4,5};
+static const UINT8 anim_jump[]      = {1,  7};
+static const UINT8 anim_hooked[]    = {1,  7};
+static const UINT8 anim_transform[] = {5,  11,13,13,13,13};
+static const UINT8 anim_victory[]   = {2,  14,15};
+static const UINT8 anim_respawn[]   = {1,  16};
+static const UINT8 anim_happy[]     = {1,  17};
 #endif
 
 const UINT8 ANIMATION_SPEED = 16; 
