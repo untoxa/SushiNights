@@ -25,7 +25,6 @@ extern Sprite* player_ptr;
 void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED;
 
 void InitRope(void) BANKED {
-	UINT8 i = 0;
 	SpriteManagerLoad(SpriteHook);
 }
 

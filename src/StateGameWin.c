@@ -22,14 +22,14 @@ void START(void) {
 	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 64, 64);
 	PlayerMenuSetAnim(sprite, 0);
 
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 60, 12);
+	sprite = SpriteManagerAdd(SpritePlayerMenu, 60,  12);
 	PlayerMenuSetAnim(sprite, 3);
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 80, 12);
+	sprite = SpriteManagerAdd(SpritePlayerMenu, 80,  12);
 	PlayerMenuSetAnim(sprite, 3);
 	sprite = SpriteManagerAdd(SpritePlayerMenu, 100, 12);
 	PlayerMenuSetAnim(sprite, 3);
 	 
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 2	, 42);
+	sprite = SpriteManagerAdd(SpritePlayerMenu, 2,   42);
 	PlayerMenuSetAnim(sprite, 1);
 
 	sprite = SpriteManagerAdd(SpritePlayerMenu, 140, 42);
