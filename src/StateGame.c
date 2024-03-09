@@ -164,7 +164,7 @@ void UPDATE(void) {
 			}
 		}
 	} else {
-		if(KEY_TICKED(J_START)) {
+		if(KEY_TICKED(J_START | J_A | J_B)) {
 			current_level ++;
 			if(levels[current_level].map == 0)
 				SetState(StateGameWin);

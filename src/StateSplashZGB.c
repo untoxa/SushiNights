@@ -19,7 +19,7 @@ void START(void) {
 void UPDATE(void) {
 	n_frames ++;
 
-	if(n_frames == 120 || KEY_TICKED(J_START)) {
+	if(n_frames == 120 || KEY_TICKED(J_START | J_A | J_B)) {
 		SetState(StateSplash);
 	}
 }

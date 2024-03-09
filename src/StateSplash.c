@@ -30,7 +30,7 @@ void START(void) {
 }
 
 void UPDATE(void) {
-	if(KEY_TICKED(J_START)) {
+	if(KEY_TICKED(J_START | J_A | J_B)) {
 		current_level = 0;
 		SetState(StateGame);
 		//SetState(StateGameWin); FOR TESTING

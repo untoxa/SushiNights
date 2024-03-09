@@ -57,7 +57,7 @@ void START(void) {
 }
 
 void UPDATE(void) {
-	if(KEY_TICKED(J_START)) {
+	if(KEY_TICKED(J_START | J_A | J_B)) {
 		SetState(StateSplash);
 	}
 }
