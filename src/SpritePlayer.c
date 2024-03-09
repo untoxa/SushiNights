@@ -116,7 +116,7 @@ void HookPlayer(UINT16 x, UINT16 y, INT8 ang, UINT8 radius) BANKED {
 
 extern UINT8 clients_collected;
 void CheckLevelComplete(void) BANKED;
-void RefreshSushies(void) BANKED;
+void RefreshSushies(void);
 UINT8 deliver_countdown;
 PLAYER_STATE cached_state;
 UINT8* cached_anim;
@@ -358,6 +358,8 @@ void UpdateVictory(void) {
 	}
 }
 
+void RenderHUD(void);
+
 void UPDATE(void) {
 	switch(player_state) {
 		case STATE_WALKING:
@@ -380,9 +382,13 @@ void UPDATE(void) {
 			break;
 	}
 
-	if(KEY_TICKED(J_B) && player_state != STATE_FALL_RESPAWN && player_state != STATE_DELIVERING_SUSHI && player_state != STATE_VICTORY && player_state != STATE_FALL_RESPAWN && !hook_ptr) {
+	if(KEY_TICKED(J_B) && (player_state != STATE_FALL_RESPAWN) && (player_state != STATE_DELIVERING_SUSHI) && (player_state != STATE_VICTORY) && (player_state != STATE_FALL_RESPAWN) && !hook_ptr) {
 		SpriteManagerAdd(SpriteHook, THIS->x, THIS->y);
 	}
+
+#if defined(SEGA)
+	if (player_state != STATE_VICTORY) RenderHUD();
+#endif
 }
 
 void DESTROY(void) {

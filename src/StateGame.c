@@ -5,6 +5,7 @@
 #include "SpriteManager.h"
 #include "Print.h"
 #include <string.h>
+#include <stdlib.h>
 #include "MapInfo.h"
 #include "Music.h"
 #include "Keys.h"
@@ -69,6 +70,7 @@ UINT8 level_complete;
 UINT16 collectables_taken[MAX_COLLECTABLES + 1];
 
 void InitRope(void) BANKED;
+void InitHUD(void) BANKED;
 
 void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) NONBANKED {
 	UINT8 * data, __save_bank = CURRENT_BANK;
@@ -88,14 +90,22 @@ void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* sta
 	SWITCH_ROM(__save_bank);
 }
 
-const UINT8 CHECKED_TILE = 75;
-const UINT8 UNCHECKED_TILE = 74;
-const UINT8 SUSHI_TILE= 86;
-const UINT8 NOSUSHI_TILE = 87;
-void RefreshSushies(void) BANKED {
 #if defined(NINTENDO)
-	UINT8 i;
+#define CHECKED_TILE   75
+#define UNCHECKED_TILE 74
+#define SUSHI_TILE     86
+#define NOSUSHI_TILE   87
+#elif defined(SEGA)
+#define CHECKED_TILE   3
+#define UNCHECKED_TILE 5
+#define SUSHI_TILE     1
+#define NOSUSHI_TILE   2
 
+extern const UINT8 hud_tiles[]; 
+#endif
+void RefreshSushies(void) NONBANKED {
+	UINT8 i;
+#if defined(NINTENDO)
 	set_win_tile_xy(6, 0, (sushi_collected) ? SUSHI_TILE : NOSUSHI_TILE);
 
 	for(i = 0; i != clients_collected; ++i) {
@@ -105,6 +115,22 @@ void RefreshSushies(void) BANKED {
 		set_win_tile_xy(19 - i, 0, UNCHECKED_TILE);
 	}
 #elif defined(SEGA)
+	UINT8 __save = CURRENT_BANK;
+	SWITCH_ROM(spriteDataBanks[SpriteHUD]);
+
+	set_sprite_native_data(spriteIdxs[SpriteHUD] + 7, 1, hud_tiles + ((sushi_collected) ? (SUSHI_TILE << 5) : (NOSUSHI_TILE << 5)));
+
+	for (i = 0; i != 3; ++i) {
+		if (i < clients_collected) {
+			set_sprite_native_data((spriteIdxs[SpriteHUD] + 1) + (i << 1), 1, hud_tiles + (CHECKED_TILE << 5));
+		} else if (i < num_clients) {
+			set_sprite_native_data((spriteIdxs[SpriteHUD] + 1) + (i << 1), 1, hud_tiles + (UNCHECKED_TILE << 5));
+		} else {
+			set_sprite_native_data((spriteIdxs[SpriteHUD] + 1) + (i << 1), 1, hud_tiles + (NOSUSHI_TILE << 5));
+		}
+	}	
+
+	SWITCH_ROM(__save);
 #endif
 }
 
@@ -129,7 +155,12 @@ void START(void) {
 
 	InitRope();
 
+#if defined(NINTENDO)
 	INIT_HUD(window);
+#elif defined(SEGA)
+	InitHUD();
+#endif
+
 	RefreshSushies();
 	
 	//INIT_CONSOLE(font, 3, 2);
@@ -141,14 +172,39 @@ void START(void) {
 	PlayMusic(level1, 1);
 }
 
+#if defined(SEGA)
+BANKREF_EXTERN(font)
+extern const UINT8 font_tiles[];
+void RefreshTimer(INT16 value) NONBANKED {
+	static UINT8 buffer[5];
+	UINT8 __save = CURRENT_BANK;
+	SWITCH_ROM(BANK(font));
+
+	itoa(value, buffer, 10);
+	if (buffer[1]) {
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + ((buffer[0] - ('0' - 27)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[1] - ('0' - 27)) << 5));
+	} else {
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + (27 << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[0] - ('0' - 27)) << 5));
+	}
+
+	SWITCH_ROM(__save);
+}
+#endif
+
 void UPDATE(void) {
 	if(!level_complete) {
 		ticks ++;
 		if(ticks == 60) {
 			ticks = 0;
-			countdown --;
+			countdown--;
+#if defined(NINTENDO)
 			PRINT_POS(2, 0);
 			Printf("%d", (UINT16)countdown);
+#elif defined(SEGA)
+			RefreshTimer(countdown);
+#endif
 			if(countdown == 99 || countdown == 9) {
 				Printf(" ");
 			} else if(countdown == 0) {

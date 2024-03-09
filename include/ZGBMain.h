@@ -17,6 +17,7 @@ _SPRITE_DMG(SpriteClient, client)\
 _SPRITE_DMG(SpriteSushi, sushi)\
 _SPRITE_DMG_MIRROR(SpritePlayerMenu, playermenu, V_MIRROR)\
 _SPRITE_DMG(SpriteBubble, bubble)\
+_SPRITE_DMG(SpriteHUD, hud)\
 SPRITE_DEF_END
 
 #include "ZGBMain_Init.h"
