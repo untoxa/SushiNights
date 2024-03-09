@@ -55,7 +55,7 @@ const struct MapInfoBanked levels[] = {
 UINT8 current_level = 0;
 
 UINT8 coll_tiles[] = {1, 2,4,5,6,7,13,15,50,51,52,53, 0};
-UINT8 highscore[] = { 0,0,0,0,0,0,0,0 };
+UINT8 highscore[] = { 0,0,0,0,0,0,0,0,0 };
 
 UINT8 rope_length;
 UINT8 sushi_collected;
@@ -96,14 +96,7 @@ void RefreshSushies(void) BANKED {
 #if defined(NINTENDO)
 	UINT8 i;
 
-	if (sushi_collected)
-	{
-		set_win_tile_xy(6, 0, SUSHI_TILE);
-	}
-	else
-	{
-		set_win_tile_xy(6, 0, NOSUSHI_TILE);
-	}
+	set_win_tile_xy(6, 0, (sushi_collected) ? SUSHI_TILE : NOSUSHI_TILE);
 
 	for(i = 0; i != clients_collected; ++i) {
 		set_win_tile_xy(19 - i, 0, CHECKED_TILE);
@@ -111,6 +104,7 @@ void RefreshSushies(void) BANKED {
 	for(; i != num_clients; ++i) {
 		set_win_tile_xy(19 - i, 0, UNCHECKED_TILE);
 	}
+#elif defined(SEGA)
 #endif
 }
 
