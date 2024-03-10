@@ -118,9 +118,9 @@ void RefreshSushies(void) NONBANKED {
 	UINT8 __save = CURRENT_BANK;
 	SWITCH_ROM(spriteDataBanks[SpriteHUD]);
 
-	set_sprite_native_data(spriteIdxs[SpriteHUD] + 7, 1, hud_tiles + ((sushi_collected) ? (SUSHI_TILE << 5) : (NOSUSHI_TILE << 5)));
+	set_sprite_native_data(spriteIdxs[SpriteHUD] + 6, 1, hud_tiles + ((sushi_collected) ? (SUSHI_TILE << 5) : (NOSUSHI_TILE << 5)));
 
-	for (i = 0; i != 3; ++i) {
+	for (i = 0; i != 4; ++i) {
 		if (i < clients_collected) {
 			set_sprite_native_data((spriteIdxs[SpriteHUD] + 1) + (i << 1), 1, hud_tiles + (CHECKED_TILE << 5));
 		} else if (i < num_clients) {
