@@ -4,7 +4,7 @@ PROJECT_NAME = SushiNights
 # They can also be built/cleaned individually: "make gg" and "make gg-clean"
 # Possible are: gb gbc pocket megaduck sms gg
 #TARGETS=gb pocket megaduck
-TARGETS=gb gg gbc sms
+TARGETS=gb gg sms
 
 # Builds all targets sequentially
 all: $(TARGETS)

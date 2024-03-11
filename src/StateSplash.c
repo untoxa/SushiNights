@@ -7,6 +7,13 @@
 #include "Print.h"
 #include "Music.h"
 
+#if defined(MASTERSYSTEM)
+#define TILE_Y_OFFSET 1
+#define TILE_X_OFFSET 5
+#else
+#define TILE_Y_OFFSET 0
+#define TILE_X_OFFSET 0
+#endif
 
 IMPORT_MAP(mainmenu);
 IMPORT_TILES(blackfont);
@@ -18,14 +25,14 @@ void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED;
 
 void START(void) {
 	InitScroll(BANK(mainmenu), &mainmenu, 0, 0);
-	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 122,56);
+	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 122 + (TILE_X_OFFSET * 8), 56 + (TILE_Y_OFFSET * 8));
 	PlayerMenuSetAnim(sprite, 0);
 	sprite->mirror = V_MIRROR;
 	
 	INIT_FONT(blackfont, PRINT_BKG);
-	PRINT(0, 13, " PRESS START ");	
-	PRINT(1, 16, "MONIS GAMES");
-	PRINT(2, 17, "GBCOMPO21");
+	PRINT(0 + TILE_X_OFFSET, 13 + TILE_Y_OFFSET, " PRESS START ");	
+	PRINT(1 + TILE_X_OFFSET, 16 + TILE_Y_OFFSET, "MONIS GAMES");
+	PRINT(2 + TILE_X_OFFSET, 17 + TILE_Y_OFFSET, "GBCOMPO21");
 	PlayMusic(start, 1);
 }
 
@@ -33,6 +40,6 @@ void UPDATE(void) {
 	if(KEY_TICKED(J_START | J_A | J_B)) {
 		current_level = 0;
 		SetState(StateGame);
-		//SetState(StateGameWin); FOR TESTING
+//		SetState(StateGameWin); //FOR TESTING
 	}
 }
