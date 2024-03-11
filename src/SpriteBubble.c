@@ -1,8 +1,9 @@
 #include "Banks/SetAutoBank.h"
 #include "Math.h"
 #include "SpriteManager.h"
+#include "Vector.h"
 
-static const UINT8 anim_bubble[] = {4,0,1,2,2};
+static const UINT8 anim_bubble[] = VECTOR(0,1,2,2);
 
 
 void START(void) {

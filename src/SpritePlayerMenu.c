@@ -1,11 +1,12 @@
 #include "Banks/SetAutoBank.h"
 #include "Trig.h"
 #include "SpriteManager.h"
+#include "Vector.h"
 
-static const UINT8 anim_idle_menu[] = { 2, 0,1};
-static const UINT8 anim_frog[] = { 2, 2, 3 };
-static const UINT8 anim_stag[] = { 2, 4, 5 };
-static const UINT8 anim_sushi[] = { 1, 6 };
+static const UINT8 anim_idle_menu[] = VECTOR(0, 1);
+static const UINT8 anim_frog[]      = VECTOR(2, 3);
+static const UINT8 anim_stag[]      = VECTOR(4, 5);
+static const UINT8 anim_sushi[]     = VECTOR(6);
 
 void PlayerMenuSetAnim(Sprite* sprite, UINT8 idx) BANKED {
 	switch(idx) {
