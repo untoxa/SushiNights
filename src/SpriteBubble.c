@@ -11,7 +11,7 @@ void START(void) {
 }
 
 void UPDATE(void) {
-	if(U_LESS_THAN(2,THIS->anim_frame))
+	if(THIS->anim_frame > 2)
 		SpriteManagerRemoveSprite(THIS);
 
 }
