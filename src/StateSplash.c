@@ -6,14 +6,7 @@
 #include "SpriteManager.h"
 #include "Print.h"
 #include "Music.h"
-
-#if defined(MASTERSYSTEM)
-#define TILE_Y_OFFSET 1
-#define TILE_X_OFFSET 5
-#else
-#define TILE_Y_OFFSET 0
-#define TILE_X_OFFSET 0
-#endif
+#include "Screen.h"
 
 IMPORT_MAP(mainmenu);
 IMPORT_TILES(blackfont);
