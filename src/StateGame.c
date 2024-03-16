@@ -210,7 +210,7 @@ void UPDATE(void) {
 			} else if(countdown == 0) {
 				//Time up!
 				SetState(StateTimeUp);
-				HIDE_WIN;
+				HIDE_HUD;
 			}
 		}
 	} else {
@@ -220,7 +220,7 @@ void UPDATE(void) {
 				SetState(StateGameWin);
 			else
 				SetState(StateGame);
-			HIDE_WIN;
+			HIDE_HUD;
 		}
 	}
 }
@@ -259,7 +259,7 @@ void DoAnimLevelEnd(void) {
 
 	UINT8 i;
 	Sprite* spr;
-	HIDE_WIN;
+	HIDE_HUD;
 	SPRITEMANAGER_ITERATE(i, spr) {
 		if(spr != player_ptr)
 			SpriteManagerRemove(i);
