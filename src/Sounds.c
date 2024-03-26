@@ -13,7 +13,7 @@ const UINT8 FX_PICKUP[] = { 0xA1, 0b11111000, 0x45, 0x00, 0xff, 0x1f, 0x86, 0x01
 
 BANKREF(FX_HIT)
 void AT(CHANNEL_4) __mute_mask_FX_HIT;
-const UINT8 FX_HIT[] = { 0xA1, 0b11110011, 0x0f, 0xf2, 0x64, 0x80, 0x01, 0b00000111};
+const UINT8 FX_HIT[] = { 0xA1, 0b01111011, 0x0f, 0xf2, 0x64, 0x80, 0x01, 0b00000111};
 
 BANKREF(FX_HIT_WALL)
 void AT(CHANNEL_1) __mute_mask_FX_HIT_WALL;
