@@ -23,12 +23,12 @@ void START(void) {
 	Sprite* sprite = SpriteManagerAdd(SpritePlayerMenu, 64 + (TILE_X_OFFSET * 8), 64 + (TILE_Y_OFFSET * 8));
 	PlayerMenuSetAnim(sprite, 0);
 
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 60 + (TILE_X_OFFSET * 8),  12 + (TILE_Y_OFFSET * 8));
-	PlayerMenuSetAnim(sprite, 3);
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 80 + (TILE_X_OFFSET * 8),  12 + (TILE_Y_OFFSET * 8));
-	PlayerMenuSetAnim(sprite, 3);
-	sprite = SpriteManagerAdd(SpritePlayerMenu, 100 + (TILE_X_OFFSET * 8), 12 + (TILE_Y_OFFSET * 8));
-	PlayerMenuSetAnim(sprite, 3);
+//	sprite = SpriteManagerAdd(SpritePlayerMenu, 60 + (TILE_X_OFFSET * 8),  12 + (TILE_Y_OFFSET * 8));
+//	PlayerMenuSetAnim(sprite, 3);
+//	sprite = SpriteManagerAdd(SpritePlayerMenu, 80 + (TILE_X_OFFSET * 8),  12 + (TILE_Y_OFFSET * 8));
+//	PlayerMenuSetAnim(sprite, 3);
+//	sprite = SpriteManagerAdd(SpritePlayerMenu, 100 + (TILE_X_OFFSET * 8), 12 + (TILE_Y_OFFSET * 8));
+//	PlayerMenuSetAnim(sprite, 3);
 	 
 	sprite = SpriteManagerAdd(SpritePlayerMenu, 2 + (TILE_X_OFFSET * 8),   42 + (TILE_Y_OFFSET * 8));
 	PlayerMenuSetAnim(sprite, 1);
@@ -52,7 +52,7 @@ void START(void) {
 	ENABLE_RAM;
 	if (savegame.best_record < totalScore) savegame.best_record = totalScore;
 	PRINT_POS(3 + TILE_X_OFFSET, 6 +  TILE_Y_OFFSET);
-	Printf("BEST:   %d00 ", totalScore);
+	Printf("BEST:   %d00 ", savegame.best_record);
 	DISABLE_RAM;
 #endif
 }
