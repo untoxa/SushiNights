@@ -39,6 +39,7 @@ typedef enum {
 	STATE_FALL_RESPAWN,
 	STATE_DELIVERING_SUSHI,
 	STATE_VICTORY,
+	N_PLAYER_STATE
 } PLAYER_STATE;
 PLAYER_STATE player_state = STATE_WALKING;
 
@@ -361,29 +362,19 @@ void UpdateVictory(void) {
 
 void RenderHUD(void);
 
-void UPDATE(void) {
-	switch(player_state) {
-		case STATE_WALKING:
-			UpdateWalk();
-			break;
-		case STATE_HOOKED:
-			UpdateHooked();
-			break;
-		case STATE_FLYING:
-			UpdateFlying();
-			break;
-		case STATE_FALL_RESPAWN:
-			UpdateFallRespawn();
-			break;
-		case STATE_DELIVERING_SUSHI:
-			UpdateDeliveringSushi();
-			break;
-		case STATE_VICTORY:
-			UpdateVictory();
-			break;
-	}
+typedef void (*update_hook_t)(void);
+const update_hook_t const update_hooks[N_PLAYER_STATE] = {
+	[STATE_WALKING]          = UpdateWalk, 
+	[STATE_HOOKED]           = UpdateHooked,
+	[STATE_FLYING]           = UpdateFlying,
+	[STATE_FALL_RESPAWN]     = UpdateFallRespawn,
+	[STATE_DELIVERING_SUSHI] = UpdateDeliveringSushi,
+	[STATE_VICTORY]          = UpdateVictory
+};
 
-	if(KEY_TICKED(J_B) && (player_state != STATE_FALL_RESPAWN) && (player_state != STATE_DELIVERING_SUSHI) && (player_state != STATE_VICTORY) && (player_state != STATE_FALL_RESPAWN) && !hook_ptr) {
+void UPDATE(void) {
+	update_hooks[player_state]();
+	if(KEY_TICKED(J_B) && (player_state != STATE_FALL_RESPAWN) && (player_state != STATE_DELIVERING_SUSHI) && (player_state != STATE_VICTORY) && !hook_ptr) {
 		SpriteManagerAdd(SpriteHook, THIS->x, THIS->y);
 	}
 
