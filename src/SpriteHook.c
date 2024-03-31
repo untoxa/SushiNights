@@ -67,17 +67,21 @@ void DrawRope(void) {
 	start_y = player_ptr->y - scroll_y + DEVICE_SPRITE_PX_OFFSET_Y;
 	step_y = (THIS->y - player_ptr->y) >> 2;
 
-	for (i = 1; i != 4; i++) {
-		hook_rope[i].dy = step_y;
-		hook_rope[i].dx = step_x;
-	}
+
+	hook_rope[3].dy = hook_rope[2].dy = hook_rope[1].dy = step_y;
+	hook_rope[3].dx = hook_rope[2].dx = hook_rope[1].dx = step_x;
+
 	next_oam_idx += move_metasprite_ex(hook_rope, spriteIdxs[SpriteHook], 0, next_oam_idx, start_x, start_y);
 }
 
+const UINT8 hook_collidable[256] = {
+	[12] = 1, [14] = 1,  [17] = 1, [19] = 1, [21] = 1, [23] = 1, [32] = 1, [34] = 1,  [36] = 1,  [37] = 1, [38] = 1 
+};
+
 void UPDATE(void) {
-	fixed radius;
-	fixed tmp_x;
-	fixed tmp_y;
+	static fixed radius;
+	static fixed tmp_x;
+	static fixed tmp_y;
 	UINT8 coll_tile;
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	
@@ -94,7 +98,7 @@ void UPDATE(void) {
 
 			if(!data->done && THIS->x < scroll_w && THIS->y < scroll_h) { 
 				coll_tile = GetScrollTile(THIS->x >> 3, THIS->y >> 3);
-				if(scroll_collisions[coll_tile] == 1 || coll_tile == 38 || coll_tile == 12 || coll_tile == 14 || coll_tile == 17 || coll_tile == 19 || coll_tile == 21 || coll_tile == 23 || coll_tile == 32 || coll_tile == 34 || coll_tile == 36 || coll_tile == 37) {
+				if(scroll_collisions[coll_tile] == 1 || (hook_collidable[coll_tile])) {
 					if (coll_tile == 2){
 						if(data->dist < 64) {
 							data->dist = 128 - data->dist;
