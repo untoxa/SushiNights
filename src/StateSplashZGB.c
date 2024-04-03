@@ -10,7 +10,7 @@
 #include "Music.h"
 
 IMPORT_MAP(splash_zgb);
-IMPORT_MAP(border);
+IMPORT_BORDER(border);
 
 static UINT8 n_frames;
 
