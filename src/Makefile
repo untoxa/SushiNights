@@ -1,3 +1,4 @@
+# Project name must not be empty or contain special characters or spaces
 PROJECT_NAME = SushiNights
 
 # Set platforms to build here, spaced separated. (These are in the separate Makefile.targets)
@@ -5,6 +6,7 @@ PROJECT_NAME = SushiNights
 # Possible are: gb gbc pocket megaduck sms gg
 TARGETS=gb megaduck gg sms
 
+# Set build type: Release, Debug or DebugVerbose
 # BUILD_TYPE = Debug
 
 # Builds all targets sequentially
