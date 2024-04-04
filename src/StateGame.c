@@ -23,7 +23,9 @@ IMPORT_MAP(level07);
 
 IMPORT_TILES(blackfont);
 IMPORT_TILES(font);
+#if defined(NINTENDO)
 IMPORT_MAP(window);
+#endif
 DECLARE_MUSIC(level1);
 
 #define BANKED_MAP(MAP, SECONDS) {BANK(MAP), &MAP, SECONDS}
