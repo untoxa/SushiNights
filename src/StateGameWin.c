@@ -8,7 +8,7 @@
 #include "savegame.h"
 #include "Screen.h"
 
-IMPORT_TILES(blackfont);
+IMPORT_FONT(blackfont);
 IMPORT_MAP(victory);
 extern UINT8 anim_idle_menu[];
 
@@ -36,7 +36,7 @@ void START(void) {
 	sprite = SpriteManagerAdd(SpritePlayerMenu, 140 + (TILE_X_OFFSET * 8), 42 + (TILE_Y_OFFSET * 8));
 	PlayerMenuSetAnim(sprite, 2);
 	
-	INIT_FONT(blackfont, PRINT_BKG);
+	INIT_FONT_EX(blackfont, PRINT_BKG);
 	PRINT(6 + TILE_X_OFFSET, 13 +  TILE_Y_OFFSET, " YOU WIN");
 
 	totalScore = 0;

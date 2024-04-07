@@ -21,8 +21,8 @@ IMPORT_MAP(maikel1);
 IMPORT_MAP(maikel2);
 IMPORT_MAP(level07);
 
-IMPORT_TILES(blackfont);
-IMPORT_TILES(font);
+IMPORT_FONT(blackfont);
+IMPORT_FONT(font);
 #if defined(NINTENDO)
 IMPORT_MAP(window);
 #endif
@@ -166,7 +166,7 @@ void START(void) {
 	RefreshSushies();
 	
 	//INIT_CONSOLE(font, 3, 2);
-	INIT_FONT(font, PRINT_WIN);
+	INIT_FONT_EX(font, PRINT_WIN);
 	PRINT(19 - num_clients - 6, 0, "CLIENTS");
 	
 
@@ -184,11 +184,11 @@ void RefreshTimer(INT16 value) NONBANKED {
 
 	itoa(value, buffer, 10);
 	if (buffer[1]) {
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + ((buffer[0] - ('0' - 27)) << 5));
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[1] - ('0' - 27)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + ((buffer[0] - ('0' - 7)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[1] - ('0' - 7)) << 5));
 	} else {
 		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + (27 << 5));
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[0] - ('0' - 27)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[0] - ('0' - 7)) << 5));
 	}
 
 	SWITCH_ROM(__save);
@@ -275,7 +275,7 @@ void DoAnimLevelEnd(void) {
 		wait_vbl_done();
 	}
 	ShowVictoryAnim();
-	INIT_FONT(blackfont, PRINT_WIN);
+	INIT_FONT_EX(blackfont, PRINT_WIN);
 	print_target = PRINT_BKG;
 	PRINT_POS(x + ((DEVICE_SCREEN_WIDTH - 16) / 2), (top_bar_start - 3) % DEVICE_SCREEN_BUFFER_HEIGHT);
 

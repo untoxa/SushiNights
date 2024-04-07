@@ -9,7 +9,7 @@
 #include "Screen.h"
 
 IMPORT_MAP(mainmenu);
-IMPORT_TILES(blackfont);
+IMPORT_FONT(blackfont);
 DECLARE_MUSIC(start);
 
 extern UINT8 current_level;
@@ -22,7 +22,7 @@ void START(void) {
 	PlayerMenuSetAnim(sprite, 0);
 	sprite->mirror = V_MIRROR;
 	
-	INIT_FONT(blackfont, PRINT_BKG);
+	INIT_FONT_EX(blackfont, PRINT_BKG);
 	PRINT(0 + TILE_X_OFFSET, 13 + TILE_Y_OFFSET, " PRESS START ");	
 	PRINT(1 + TILE_X_OFFSET, 16 + TILE_Y_OFFSET, "MONIS GAMES");
 	PRINT(2 + TILE_X_OFFSET, 17 + TILE_Y_OFFSET, "GBCOMPO21");
