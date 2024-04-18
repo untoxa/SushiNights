@@ -10,7 +10,6 @@
 #include "Music.h"
 #include "Keys.h"
 
-IMPORT_MAP(map);
 IMPORT_MAP(level01);
 IMPORT_MAP(level02);
 IMPORT_MAP(level03);
