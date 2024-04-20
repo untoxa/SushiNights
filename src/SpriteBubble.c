@@ -1,4 +1,5 @@
 #include "Banks/SetAutoBank.h"
+
 #include "Math.h"
 #include "SpriteManager.h"
 #include "Vector.h"

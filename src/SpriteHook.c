@@ -1,13 +1,17 @@
 #include "Banks/SetAutoBank.h"
+
+#include <string.h>
+
 #include "SpriteManager.h"
 #include "Sprite.h"
 #include "Scroll.h"
 #include "Trig.h"
 #include "ZGBMain.h"
 #include "Scroll.h"
-#include <string.h>
 #include "Keys.h"
-#include "Sounds.h"
+#include "Sound.h"
+
+DECLARE_SFX(FX_HIT);
 
 extern UINT8 next_oam_idx;
 extern UINT8 rope_length;

@@ -1,4 +1,7 @@
 #include "Banks/SetAutoBank.h"
+
+#include <gbdk/platform.h>
+
 #include "Sound.h"
 
 #if defined(NINTENDO)

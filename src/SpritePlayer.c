@@ -1,12 +1,16 @@
 #include "Banks/SetAutoBank.h"
+
 #include "Trig.h"
 #include "SpriteManager.h"
 #include "Keys.h"
 #include "ZGBMain.h"
 #include "Scroll.h"
 #include "Print.h"
-#include "Sounds.h"
+#include "Sound.h"
 #include "Vector.h"
+
+DECLARE_SFX(FX_JUMP);
+DECLARE_SFX(FX_HIT_WALL);
 
 Sprite* player_ptr;
 extern Sprite* hook_ptr;

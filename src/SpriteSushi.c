@@ -1,9 +1,11 @@
 #include "Banks/SetAutoBank.h"
+
 #include "Trig.h"
 #include "SpriteManager.h"
-#include "Sounds.h"
+#include "Sound.h"
 #include "ZGBMain.h"
 
+DECLARE_SFX(FX_PICKUP);
 
 extern Sprite* player_ptr;
 extern UINT8 sushi_collected;

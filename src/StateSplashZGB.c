@@ -6,11 +6,13 @@
 #include "ZGBMain.h"
 #include "SGB.h"
 #include "Palette.h"
-#include "Sounds.h"
+#include "Sound.h"
 #include "Music.h"
 
 IMPORT_MAP(splash_zgb);
 IMPORT_BORDER(border);
+
+DECLARE_SFX(FX_SHEEP);
 
 static UINT8 n_frames;
 
