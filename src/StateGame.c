@@ -56,8 +56,8 @@ const struct MapInfoBanked levels[] = {
 
 UINT8 current_level = 0;
 
-UINT8 coll_tiles[] = {1, 2,4,5,6,7,13,15,50,51,52,53, 0};
-UINT8 highscore[] = { 0,0,0,0,0,0,0,0,0 };
+UINT8 coll_tiles[] = { 1, 4, 5, 6, 7, 13, 15, 50, 51, 52, 53, 0 };
+UINT8 highscore[]  = { 0, 0, 0,0, 0, 0, 0, 0, 0 };
 
 UINT8 rope_length;
 UINT8 sushi_collected;
@@ -183,11 +183,11 @@ void RefreshTimer(INT16 value) NONBANKED {
 
 	itoa(value, buffer, 10);
 	if (buffer[1]) {
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + ((buffer[0] - ('0' - 7)) << 5));
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[1] - ('0' - 7)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + (font_recode_table[buffer[0] - ' '] << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + (font_recode_table[buffer[1] - ' '] << 5));
 	} else {
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + (27 << 5));
-		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + ((buffer[0] - ('0' - 7)) << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 2, 1, font_tiles + (font_recode_table['0' - ' '] << 5));
+		set_sprite_native_data(spriteIdxs[SpriteHUD] + 4, 1, font_tiles + (font_recode_table[buffer[0] - ' '] << 5));
 	}
 
 	SWITCH_ROM(__save);
