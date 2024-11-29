@@ -25,7 +25,7 @@ void START(void) {
 		data->start_y = THIS->y;
 		data->frame = 0;
 	}
-  SetFrame(THIS, (((THIS->x >> 3) & 0x2) == 0) ? 0 : 1);
+	SetFrame(THIS, (((THIS->x >> 3) & 0x2) == 0) ? 0 : 1);
 }
 
 void UPDATE(void) {
