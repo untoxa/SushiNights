@@ -33,8 +33,8 @@ jobs:
     - name: Unpack ZGB-Linux-x64
       run: |
         tar -xzf ZGB-Linux-x64.tar.gz
-        echo "GBDK_HOME=$(pwd)/ZGB-Linux-x64/CrossZGB/gbdk" >> $GITHUB_ENV
-        echo "ZGB_PATH=$(pwd)/ZGB-Linux-x64/CrossZGB/ZGB/common" >> $GITHUB_ENV
+        echo "GBDK_HOME=$(pwd)/CrossZGB/gbdk" >> $GITHUB_ENV
+        echo "ZGB_PATH=$(pwd)/CrossZGB/ZGB/common" >> $GITHUB_ENV
 
     - name: Build project
       run: |
