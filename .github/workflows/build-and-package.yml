@@ -3,10 +3,7 @@ name: Build SushiNights
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - master
   workflow_dispatch:
 
 jobs:
@@ -30,14 +27,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install pillow wave
 
-    - name: Download and unpack ZGB-Linux-x64
+    - name: Download ZGB-Linux-x64
+      run: wget https://github.com/gbdk-2020/CrossZGB/releases/latest/download/ZGB-Linux-x64.tar.gz
+
+    - name: Unpack ZGB-Linux-x64
       run: |
-        wget https://github.com/gbdk-2020/CrossZGB/releases/latest/download/ZGB-Linux-x64.tar.gz
-        ls -l ZGB-Linux-x64.tar.gz
         tar -xzf ZGB-Linux-x64.tar.gz
-        ls -l
-        echo "GBDK_HOME=$(pwd)/ZGB-Linux-x64/gbdk" >> $GITHUB_ENV
-        echo "ZGB_PATH=$(pwd)/ZGB-Linux-x64/ZGB/common" >> $GITHUB_ENV
+        echo "GBDK_HOME=$(pwd)/ZGB-Linux-x64/CrossZGB/gbdk" >> $GITHUB_ENV
+        echo "ZGB_PATH=$(pwd)/ZGB-Linux-x64/CrossZGB/ZGB/common" >> $GITHUB_ENV
 
     - name: Build project
       run: |
