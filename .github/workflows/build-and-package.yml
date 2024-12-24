@@ -33,7 +33,9 @@ jobs:
     - name: Download and unpack ZGB-Linux-x64
       run: |
         wget https://github.com/gbdk-2020/CrossZGB/releases/latest/download/ZGB-Linux-x64.tar.gz
+        ls -l ZGB-Linux-x64.tar.gz
         tar -xzf ZGB-Linux-x64.tar.gz
+        ls -l
         echo "GBDK_HOME=$(pwd)/ZGB-Linux-x64/gbdk" >> $GITHUB_ENV
         echo "ZGB_PATH=$(pwd)/ZGB-Linux-x64/ZGB/common" >> $GITHUB_ENV
 
