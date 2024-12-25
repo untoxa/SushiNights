@@ -50,6 +50,24 @@ jobs:
         name: SushiNights-ROM-files
         path: bin/
 
+    - name: Get workflow runs
+      id: get-runs
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { owner, repo } = context.repo;
+          const workflow_id = 'CI'; // Replace with your workflow file name or ID
+
+          const runs = await github.actions.listWorkflowRuns({
+            owner,
+            repo,
+            workflow_id,
+            status: 'success', // List only successful runs
+            per_page: 100
+          });
+
+          return runs.data.workflow_runs;
+
     - name: Delete old workflow runs
       uses: actions/github-script@v6
       with:
