@@ -49,3 +49,20 @@ jobs:
       with:
         name: SushiNights-ROM-files
         path: bin/
+
+    - name: Delete old workflow runs
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const runs = ${{ steps.get-runs.outputs.result }};
+          const keepLatestRun = runs[0]; // Keep the latest successful run
+
+          for (const run of runs) {
+            if (run.id !== keepLatestRun.id) {
+              await github.actions.deleteWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: run.id
+              });
+            }
+          }
