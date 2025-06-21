@@ -88,7 +88,7 @@ void UPDATE(void) {
 	static fixed tmp_y;
 	UINT8 coll_tile;
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
-	
+
 	if(!data->hooked) {
 		data->dist += 5;
 		radius.w = ((SIN(data->dist) * data->max_length) >> 6);
@@ -102,7 +102,7 @@ void UPDATE(void) {
 
 			if(!data->done && THIS->x < scroll_w && THIS->y < scroll_h) { 
 				coll_tile = GetScrollTile(THIS->x >> 3, THIS->y >> 3);
-				if(scroll_collisions[coll_tile] == 1 || (hook_collidable[coll_tile])) {
+				if((scroll_collisions[coll_tile] & THIS->coll_group) || (hook_collidable[coll_tile])) {
 					if (coll_tile == 2){
 						if(data->dist < 64) {
 							data->dist = 128 - data->dist;
@@ -115,7 +115,7 @@ void UPDATE(void) {
 				} 
 			}
 		} else {
-			SpriteManagerRemove(THIS_IDX);
+			SpriteManagerRemoveSprite(THIS);
 		}
 	}
 

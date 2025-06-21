@@ -20,7 +20,7 @@ typedef struct {
 void START(void) {
 	CUSTOM_DATA* data = (CUSTOM_DATA*)THIS->custom_data;
 	if(IsCollected(THIS) != 255) {
-		SpriteManagerRemove(THIS_IDX);
+		SpriteManagerRemoveSprite(THIS);
 	} else {
 		data->start_y = THIS->y;
 		data->frame = 0;
@@ -39,7 +39,7 @@ void UPDATE(void) {
 			TakeCollectable(THIS);
 			SpriteManagerAdd(SpriteBubble, THIS->x , THIS->y );
 			ExecuteSFX(BANK(FX_PICKUP), FX_PICKUP, SFX_MUTE_MASK(FX_PICKUP), SFX_PRIORITY_NORMAL);
-			SpriteManagerRemove(THIS_IDX);
+			SpriteManagerRemoveSprite(THIS);
 		}
 	}
 }

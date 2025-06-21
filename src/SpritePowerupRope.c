@@ -8,7 +8,7 @@ extern UINT8 rope_length;
 
 void START(void) {
 	if(IsCollected(THIS) != 255) {
-		SpriteManagerRemove(THIS_IDX);
+		SpriteManagerRemoveSprite(THIS);
 	}
 }
 
@@ -16,7 +16,7 @@ void UPDATE(void) {
 	if(CheckCollision(THIS, player_ptr)) {
 		rope_length += 10;
 		TakeCollectable(THIS);
-		SpriteManagerRemove(THIS_IDX);
+		SpriteManagerRemoveSprite(THIS);
 	}
 }
 

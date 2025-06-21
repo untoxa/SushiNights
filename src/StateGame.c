@@ -74,18 +74,17 @@ void InitRope(void) BANKED;
 void InitHUD(void) BANKED;
 
 void LocateStuff(UINT8 map_bank, struct MapInfo* map, UINT8* start_x, UINT8* start_y) NONBANKED {
-	UINT8 * data, __save_bank = CURRENT_BANK;
+	UINT8 __save_bank = CURRENT_BANK;
 	SWITCH_ROM(map_bank);
-	data = map->data;
-	for(UINT8 y = 0; y < map->height; ++ y) {
-		for(UINT8 x = 0; x < map->width; ++ x) {
-			UINT8 tile = *data++;
-			if(tile == 252) {          //client
-				num_clients++;
-			} else if (tile == 255) {  //player
-				*start_x = x;
-				*start_y = y;
-			}
+	for (UINT8 * data = map->data + (map->height * map->width) - 1; data != map->data - 1; --data) {
+		switch (*data) {
+			case 252:
+				++num_clients;
+				break;
+			case 255:
+				*start_x = (UINT16)(data - map->data) % map->width;
+				*start_y = (UINT16)(data - map->data) / map->width;
+				break;
 		}
 	}
 	SWITCH_ROM(__save_bank);
